@@ -6,7 +6,7 @@ import pytest
 from pyknp import Morpheme
 
 from jinf import InflectionForm, Jinf
-from jinf.inflection_form import INFECTION_FORMS
+from jinf.inflection_form import INFLECTION_FORMS
 
 
 def test_init():
@@ -252,7 +252,7 @@ def test_call_error_1():
 )
 def test_call_error_2(m: Morpheme):
     jinf = Jinf()
-    for inf_form in INFECTION_FORMS:
+    for inf_form in INFLECTION_FORMS:
         with pytest.raises(ValueError):
             _ = jinf(m, inf_form)
 

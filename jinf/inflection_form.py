@@ -1,6 +1,6 @@
 from typing import Literal
 
-INFECTION_FORMS = [
+INFLECTION_FORMS = [
     "語幹",
     "基本形",
     "未然形",
@@ -171,4 +171,4 @@ InflectionForm = Literal[
 
 
 def validate_inflection_form(inf_form: InflectionForm) -> bool:
-    return inf_form in INFECTION_FORMS
+    return inf_form in INFLECTION_FORMS
