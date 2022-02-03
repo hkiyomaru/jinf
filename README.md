@@ -60,6 +60,15 @@ print(jinf.convert(lemma, inf_type, "意志形"))  # 走ろう
 print(jinf.convert(lemma, inf_type, "命令形"))  # 走れ
 ```
 
-## List of inflection types/forms
+## List of available inflection types/forms
+
+Run the following:
+
+```python
+from jinf import INFLECTION_TYPES, INFLECTION_FORMS
+
+print(INFLECTION_TYPES)  # ["母音動詞", "子音動詞カ行", "子音動詞カ行促音便形", ...]
+print(INFLECTION_FORMS)  # ["語幹", "基本形", "未然形", ...]
+```
 
 See [JUMAN.katuyou](https://github.com/ku-nlp/JumanDIC/blob/master/grammar/JUMAN.katuyou) in [JumanDic](https://github.com/ku-nlp/JumanDIC).
