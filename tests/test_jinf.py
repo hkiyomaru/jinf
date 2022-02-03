@@ -1,5 +1,6 @@
 import json
 import tempfile
+from typing import Sequence
 
 import pytest
 from pyknp import Morpheme
@@ -220,7 +221,7 @@ def test_init_error_1():
         ),
     ],
 )
-def test_call(m: Morpheme, inf_forms: list[InflectionForm], infs: list[str]):
+def test_call(m: Morpheme, inf_forms: Sequence[InflectionForm], infs: Sequence[str]):
     jinf = Jinf()
     for inf, inf_form in zip(infs, inf_forms):
         assert inf == jinf(m, inf_form)
@@ -285,7 +286,7 @@ def test_call_error_2(m: Morpheme):
         ),
     ],
 )
-def test_call_error_3(m: Morpheme, inf_forms: list[InflectionForm]):
+def test_call_error_3(m: Morpheme, inf_forms: Sequence[InflectionForm]):
     jinf = Jinf()
     for inf_form in inf_forms:
         with pytest.raises(ValueError):
