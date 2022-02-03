@@ -1,14 +1,11 @@
 import json
 import os.path
-from logging import getLogger
 from typing import Optional
 
 from pyknp import Morpheme
 
 from jinf.inflection_form import InflectionForm, validate_inflection_form
 from jinf.inflection_type import InflectionType, validate_inflection_type
-
-logger = getLogger(__file__)
 
 
 class Jinf:
