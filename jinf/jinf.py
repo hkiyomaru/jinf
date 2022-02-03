@@ -1,6 +1,6 @@
 import json
 import os.path
-from typing import Optional
+from typing import Dict, Optional
 
 from pyknp import Morpheme
 
@@ -40,7 +40,7 @@ class Jinf:
         return os.path.join(os.path.dirname(__file__), "data", "jinf.json")
 
     @staticmethod
-    def _load_dict(path: str) -> dict[InflectionType, dict[InflectionForm, str]]:
+    def _load_dict(path: str) -> Dict[InflectionType, Dict[InflectionForm, str]]:
         with open(path) as f:
             dat = json.load(f)
         dic = {}
