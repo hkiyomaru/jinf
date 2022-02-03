@@ -3,6 +3,12 @@
 **Jinf** is a Japanese inflection converter.
 Jinf depends on [JumanDic](https://github.com/ku-nlp/JumanDIC) and follows the grammar.
 
+## Installation
+
+```shell
+pip install jinf
+```
+
 ## Usage
 
 ### [pyknp](https://github.com/ku-nlp/pyknp) integration
@@ -28,9 +34,6 @@ print(jinf(mrph, "命令形"))  # 走れ
 
 mrph = Morpheme('言語 げんご 言語 名詞 6 普通名詞 1 * 0 * 0 "代表表記:言語/げんご カテゴリ:抽象物"')
 print(jinf(mrph, "基本形"))  # ValueError: '言語' is invariable
-
-mrph = Morpheme('走る はしる 走る 動詞 2 * 0 子音動詞ラ行 10 基本形 2 "代表表記:走る/はしる"')
-print(jinf(mrph, "三角形"))  # ValueError: '三角形' is not a valid inflection form
 
 mrph = Morpheme('走る はしる 走る 動詞 2 * 0 子音動詞ラ行 10 基本形 2 "代表表記:走る/はしる"')
 print(jinf(mrph, "三角形"))  # ValueError: '三角形' is not a valid inflection form
