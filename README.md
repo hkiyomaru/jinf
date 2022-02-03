@@ -1,5 +1,7 @@
 # Jinf: Japanese Inflection Converter
 
+[![test](https://github.com/hkiyomaru/jinf/actions/workflows/test.yml/badge.svg)](https://github.com/hkiyomaru/jinf/actions/workflows/test.yml)
+
 **Jinf** is a Japanese inflection converter.
 Jinf depends on [JumanDic](https://github.com/ku-nlp/JumanDIC) and follows the grammar.
 
