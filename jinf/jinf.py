@@ -1,37 +1,38 @@
 import json
 import os.path
-from typing import Optional, Union
+from logging import getLogger
+from typing import Optional
 
 from pyknp import Morpheme
 
-from jinf.inflection_form import InflectionForm
-from jinf.inflection_type import InflectionType
+from jinf.inflection_form import InflectionForm, validate_inflection_form
+from jinf.inflection_type import InflectionType, validate_inflection_type
+
+logger = getLogger(__file__)
 
 
 class Jinf:
     def __init__(self, dict_path: Optional[str] = None):
         self.dict = self._load_dict(dict_path or self.dict_path)
-        import sys
 
-        print(self.dict, file=sys.stderr)
+    def __call__(self, m: Morpheme, inf_form: InflectionForm) -> str:
+        if not isinstance(inf_form, str) or not validate_inflection_form(inf_form):
+            raise ValueError(f"'{inf_form}' is not a valid inflection form")
 
-    def __call__(self, m: Morpheme, inf_form: Union[str, InflectionForm]) -> str:
-        if isinstance(inf_form, str):
-            inf_form = InflectionForm(inf_form)
-        if not isinstance(inf_form, InflectionForm):
-            raise ValueError(f"'{inf_form}' is not a valid {InflectionForm.__name__}")
-
-        if not InflectionType.has_value(m.katuyou1):
-            return m.midasi
-        cur_inf_type = InflectionType(m.katuyou1)
+        cur_inf_type = m.katuyou1
+        if not validate_inflection_type(cur_inf_type):
+            raise ValueError(
+                f"'{inf_form} is not a valid inflection form for '{m.midasi}'"
+            )
+        if inf_form not in self.dict[cur_inf_type]:
+            raise ValueError(
+                f"'{inf_form} is not a valid inflection form for '{m.midasi}'"
+            )
 
         lemma = m.genkei
-        stem = lemma.strip(self.dict[cur_inf_type][InflectionForm.KIHON])
+        stem = lemma.strip(self.dict[cur_inf_type]["基本形"])
         inf = self.dict[cur_inf_type][inf_form]
-        if inf == "*":
-            return stem
-        else:
-            return stem + inf
+        return stem if inf == "*" else stem + inf
 
     @property
     def dict_path(self) -> str:
@@ -43,10 +44,8 @@ class Jinf:
             dat = json.load(f)
         dic = {}
         for inf_type, d in dat.items():
-            inf_type = InflectionType(inf_type)
             if inf_type not in dic:
                 dic[inf_type] = {}
             for inf_form, inf in d.items():
-                inf_form = InflectionForm(inf_form)
                 dic[inf_type][inf_form] = inf
         return dic
