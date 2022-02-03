@@ -13,7 +13,10 @@ class Jinf:
         self.dict = self._load_dict(dict_path or self.dict_path)
 
     def __call__(self, m: Morpheme, inf_form: Union[str, InflectionForm]) -> str:
-        pass
+        if isinstance(inf_form, str):
+            inf_form = InflectionForm(inf_form)
+        if not isinstance(inf_form, InflectionForm):
+            raise ValueError(f"'{inf_form}' is not a valid {InflectionForm.__name__}")
 
     @property
     def dict_path(self) -> str:
