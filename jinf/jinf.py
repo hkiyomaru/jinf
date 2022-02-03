@@ -11,12 +11,27 @@ from jinf.inflection_type import InflectionType
 class Jinf:
     def __init__(self, dict_path: Optional[str] = None):
         self.dict = self._load_dict(dict_path or self.dict_path)
+        import sys
+
+        print(self.dict, file=sys.stderr)
 
     def __call__(self, m: Morpheme, inf_form: Union[str, InflectionForm]) -> str:
         if isinstance(inf_form, str):
             inf_form = InflectionForm(inf_form)
         if not isinstance(inf_form, InflectionForm):
             raise ValueError(f"'{inf_form}' is not a valid {InflectionForm.__name__}")
+
+        if not InflectionType.has_value(m.katuyou1):
+            return m.midasi
+        cur_inf_type = InflectionType(m.katuyou1)
+
+        lemma = m.genkei
+        stem = lemma.strip(self.dict[cur_inf_type][InflectionForm.KIHON])
+        inf = self.dict[cur_inf_type][inf_form]
+        if inf == "*":
+            return stem
+        else:
+            return stem + inf
 
     @property
     def dict_path(self) -> str:
