@@ -1,12 +1,22 @@
 [tool.poetry]
 name = "jinf"
 version = "0.1.0"
-description = ""
+description = "A Japanese inflection converter."
+license = "MIT"
 authors = ["Hirokazu Kiyomaru <h.kiyomaru@gmail.com>"]
+readme = "README.md"
+repository = "https://github.com/hkiyomaru/jinf"
+keywords = [
+    "NLP",
+    "JUMAN"
+]
+packages = [
+    { include = "jinf" }
+]
 
 [tool.poetry.dependencies]
-python = "^3.8"
-pyknp = "^0.6.1"
+python = ">= 3.6"
+pyknp = ">= 0.5.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
