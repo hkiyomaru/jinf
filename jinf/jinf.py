@@ -1,6 +1,6 @@
 import json
 import os.path
-from typing import TYPE_CHECKING, Dict, Optional
+from typing import TYPE_CHECKING, Dict
 
 from jinf.inflection_form import is_valid_form
 from jinf.inflection_type import is_valid_type
@@ -10,8 +10,12 @@ if TYPE_CHECKING:
 
 
 class Jinf:
-    def __init__(self, dict_path: Optional[str] = None):
-        self.dict = self._load_dict(dict_path or self.dict_path)
+    def __init__(self):
+        dict_dir = os.path.join(os.path.dirname(__file__), "data")
+        with open(os.path.join(dict_dir, "jinf.json"), "rt") as f:
+            self.dict: Dict[str, Dict[str, str]] = json.load(f)
+        with open(os.path.join(dict_dir, "e_basic.json"), "rt") as f:
+            self.e_basic_dict: Dict[str, str] = json.load(f)
 
     def __call__(
         self, text: str, inf_type: str, source_inf_form: str, target_inf_form: str
@@ -30,9 +34,22 @@ class Jinf:
                 f"'{target_inf_form}' is not a valid inflection form of '{inf_type}'"
             )
 
-        stem = text.strip(self.dict[inf_type][source_inf_form])
-        inf = self.dict[inf_type][target_inf_form]
-        return stem if inf == "*" else stem + inf
+        if source_inf_form == "エ基本形":
+            raise NotImplementedError  # TODO: identify the stem
+        else:
+            stem = text.strip(self.dict[inf_type][source_inf_form])
+
+        if target_inf_form == "エ基本形":
+            if char := self.e_basic_dict.get(stem[-1], None):
+                stem = stem[:-1] + char
+            inf = "え"
+        else:
+            inf = self.dict[inf_type][target_inf_form]
+
+        if inf == "*":
+            return stem
+        else:
+            return stem + inf
 
     def convert(
         self, text: str, inf_type: str, source_inf_form: str, target_inf_form: str
@@ -41,19 +58,3 @@ class Jinf:
 
     def convert_pyknp_morpheme(self, m: "Morpheme", target_inf_form: str) -> str:
         return self(m.genkei, m.katuyou1, "基本形", target_inf_form)
-
-    @property
-    def dict_path(self) -> str:
-        return os.path.join(os.path.dirname(__file__), "data", "jinf.json")
-
-    @staticmethod
-    def _load_dict(path: str) -> Dict[str, Dict[str, str]]:
-        with open(path) as f:
-            dat = json.load(f)
-        dic: Dict[str, Dict[str, str]] = {}
-        for inf_type, d in dat.items():
-            if inf_type not in dic:
-                dic[inf_type] = {}
-            for inf_form, inf in d.items():
-                dic[inf_type][inf_form] = inf
-        return dic

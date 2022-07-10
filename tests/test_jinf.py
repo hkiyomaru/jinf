@@ -1,5 +1,3 @@
-import json
-import tempfile
 from typing import Sequence
 
 import pytest
@@ -11,18 +9,6 @@ from jinf.inflection_form import INFLECTION_FORMS
 
 def test_init():
     _ = Jinf()
-
-
-def test_init_error_0():
-    with pytest.raises(FileNotFoundError):
-        _ = Jinf("foo")
-
-
-def test_init_error_1():
-    with tempfile.NamedTemporaryFile("wt", encoding="utf-8") as f:
-        f.write("{")  # invalid json
-        with pytest.raises(json.decoder.JSONDecodeError):
-            _ = Jinf(f.name)
 
 
 @pytest.mark.parametrize(
@@ -225,6 +211,49 @@ def test_call(m: Morpheme, inf_forms: Sequence[str], infs: Sequence[str]):
     jinf = Jinf()
     for inf, inf_form in zip(infs, inf_forms):
         assert inf == jinf.convert(m.midasi, m.katuyou1, m.katuyou2, inf_form)
+        assert inf == jinf.convert_pyknp_morpheme(m, inf_form)
+
+
+@pytest.mark.parametrize(
+    "m, inf_forms, infs",
+    [
+        (
+            Morpheme('すげえ すげえ すごい 形容詞 3 * 0 イ形容詞アウオ段 18 エ基本形 23 "代表表記:凄い/すごい"'),
+            ("語幹", "基本形", "エ基本形"),
+            ("すご", "すごい", "すげえ"),
+        ),
+        (
+            Morpheme('やべえ やべえ やばい 形容詞 3 * 0 イ形容詞アウオ段 18 エ基本形 23 "代表表記:やばい/やばい"'),
+            ("語幹", "基本形", "エ基本形"),
+            ("やば", "やばい", "やべえ"),
+        ),
+        (
+            Morpheme(
+                'しょっぺえ しょっぺえ しょっぱい 形容詞 3 * 0 イ形容詞アウオ段 18 エ基本形 23 "代表表記:塩っぱい/しょっぱい ドメイン:料理・食事"'
+            ),
+            ("語幹", "基本形", "エ基本形"),
+            ("しょっぱ", "しょっぱい", "しょっぺえ"),
+        ),
+        (
+            Morpheme(
+                'よええ よええ よわい 形容詞 3 * 0 イ形容詞アウオ段 18 エ基本形 23 "代表表記:弱い/よわい 反義:形容詞:強い/つよい;形容詞:丈夫だ/じょうぶだ"'
+            ),
+            ("語幹", "基本形", "エ基本形"),
+            ("よわ", "よわい", "よええ"),
+        ),
+        (
+            Morpheme('汚え きたねえ 汚い 形容詞 3 * 0 イ形容詞アウオ段 18 エ基本形 23 "代表表記:汚い/きたない"'),
+            ("語幹", "基本形", "エ基本形"),
+            ("汚", "汚い", "汚え"),
+        ),
+    ],
+)
+def test_call_e_kihon(m: Morpheme, inf_forms: Sequence[str], infs: Sequence[str]):
+    jinf = Jinf()
+    for inf, inf_form in zip(infs, inf_forms):
+        with pytest.raises(NotImplementedError):
+            # TODO: identify the stem
+            assert inf == jinf.convert(m.midasi, m.katuyou1, m.katuyou2, inf_form)
         assert inf == jinf.convert_pyknp_morpheme(m, inf_form)
 
 
