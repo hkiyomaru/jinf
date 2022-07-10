@@ -1,11 +1,12 @@
 import json
 import os.path
-from typing import Dict, Optional
-
-from pyknp import Morpheme
+from typing import TYPE_CHECKING, Dict, Optional
 
 from jinf.inflection_form import is_valid_inflection_form
 from jinf.inflection_type import is_valid_inflection_type
+
+if TYPE_CHECKING:
+    from pyknp import Morpheme
 
 
 class Jinf:
@@ -42,7 +43,7 @@ class Jinf:
     ):
         return self(text, inf_type, source_inf_form, target_inf_form)
 
-    def convert_pyknp_morpheme(self, m: Morpheme, target_inf_form: str) -> str:
+    def convert_pyknp_morpheme(self, m: "Morpheme", target_inf_form: str) -> str:
         return self(m.midasi, m.katuyou1, m.katuyou2, target_inf_form)
 
     @property

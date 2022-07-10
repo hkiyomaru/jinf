@@ -32,7 +32,13 @@ print(jinf(text, inf_type, source_inf_form, "デアル列命令形"))  # ValueEr
 ### [pyknp](https://github.com/ku-nlp/pyknp) integration
 
 [pyknp](https://github.com/ku-nlp/pyknp) is the official Python binding for Jumanpp.
-[Morpheme](https://pyknp.readthedocs.io/en/latest/mrph.html#module-pyknp.juman.morpheme) objects can be used as input for Jinf.
+To enable the pyknp integration, specify the extra requirement when installing Jinf:
+
+```shell
+pip install jinf[pyknp]
+```
+
+[Morpheme](https://pyknp.readthedocs.io/en/latest/mrph.html#module-pyknp.juman.morpheme) objects can be used as input for Jinf as follows.
 
 ```python
 from jinf import Jinf

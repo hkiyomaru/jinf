@@ -72,7 +72,7 @@ name = "pyknp"
 version = "0.6.1"
 description = "Python module for JUMAN/KNP"
 category = "main"
-optional = false
+optional = true
 python-versions = ">=3.7,<4.0"
 
 [package.dependencies]
@@ -115,7 +115,7 @@ name = "six"
 version = "1.16.0"
 description = "Python 2 and 3 compatibility utilities"
 category = "main"
-optional = false
+optional = true
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
 
 [[package]]
@@ -126,10 +126,13 @@ category = "dev"
 optional = false
 python-versions = ">=3.7"
 
+[extras]
+pyknp = ["pyknp"]
+
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8,<4.0"
-content-hash = "54366f6b283d27cd67de1249767fb7ba3016a98e6abae60a612944ac1d6068f4"
+content-hash = "2ae54119fab3cb9b24b79414fe9858d7d49e648cb3d5d856cbf706a31e29f4c3"
 
 [metadata.files]
 atomicwrites = []
