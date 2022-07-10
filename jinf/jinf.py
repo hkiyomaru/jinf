@@ -12,10 +12,7 @@ class Jinf:
     def __init__(self, dict_path: Optional[str] = None):
         self.dict = self._load_dict(dict_path or self.dict_path)
 
-    def __call__(self, m: Morpheme, target_inf_form: str) -> str:
-        return self.convert(m.midasi, m.katuyou1, m.katuyou2, target_inf_form)
-
-    def convert(
+    def __call__(
         self, text: str, inf_type: str, source_inf_form: str, target_inf_form: str
     ):
         if not is_valid_inflection_type(inf_type):
@@ -39,6 +36,14 @@ class Jinf:
         stem = text.strip(self.dict[inf_type][source_inf_form])
         inf = self.dict[inf_type][target_inf_form]
         return stem if inf == "*" else stem + inf
+
+    def convert(
+        self, text: str, inf_type: str, source_inf_form: str, target_inf_form: str
+    ):
+        return self(text, inf_type, source_inf_form, target_inf_form)
+
+    def convert_pyknp_morpheme(self, m: Morpheme, target_inf_form: str) -> str:
+        return self(m.midasi, m.katuyou1, m.katuyou2, target_inf_form)
 
     @property
     def dict_path(self) -> str:

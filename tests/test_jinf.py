@@ -224,21 +224,26 @@ def test_init_error_1():
 def test_call(m: Morpheme, inf_forms: Sequence[str], infs: Sequence[str]):
     jinf = Jinf()
     for inf, inf_form in zip(infs, inf_forms):
-        assert inf == jinf(m, inf_form)
+        assert inf == jinf.convert(m.midasi, m.katuyou1, m.katuyou2, inf_form)
+        assert inf == jinf.convert_pyknp_morpheme(m, inf_form)
 
 
 def test_call_error_0():
     jinf = Jinf()
     m = Morpheme('言語 げんご 言語 名詞 6 普通名詞 1 * 0 * 0 "代表表記:言語/げんご カテゴリ:抽象物"')
     with pytest.raises(ValueError):
-        jinf(m, "未然形_")  # invalid inflection form
+        jinf.convert(m.midasi, m.katuyou1, m.katuyou2, "未然形_")
+    with pytest.raises(ValueError):
+        jinf.convert_pyknp_morpheme(m, "未然形_")  # invalid inflection form
 
 
 def test_call_error_1():
     jinf = Jinf()
     m = Morpheme('言語 げんご 言語 名詞 6 普通名詞 1 * 0 * 0 "代表表記:言語/げんご カテゴリ:抽象物"')
     with pytest.raises(ValueError):
-        jinf(m, 42)  # invalid inflection form
+        jinf.convert(m.midasi, m.katuyou1, m.katuyou2, 42)  # invalid inflection form
+    with pytest.raises(ValueError):
+        jinf.convert_pyknp_morpheme(m, 42)  # invalid inflection form
 
 
 @pytest.mark.parametrize(
@@ -254,7 +259,9 @@ def test_call_error_2(m: Morpheme):
     jinf = Jinf()
     for inf_form in INFLECTION_FORMS:
         with pytest.raises(ValueError):
-            _ = jinf(m, inf_form)
+            _ = jinf.convert(m.midasi, m.katuyou1, m.katuyou2, inf_form)
+        with pytest.raises(ValueError):
+            _ = jinf.convert_pyknp_morpheme(m, inf_form)
 
 
 @pytest.mark.parametrize(
@@ -290,4 +297,6 @@ def test_call_error_3(m: Morpheme, inf_forms: Sequence[str]):
     jinf = Jinf()
     for inf_form in inf_forms:
         with pytest.raises(ValueError):
-            _ = jinf(m, inf_form)
+            jinf.convert(m.midasi, m.katuyou1, m.katuyou2, inf_form)
+        with pytest.raises(ValueError):
+            _ = jinf.convert_pyknp_morpheme(m, inf_form)
