@@ -26,7 +26,7 @@ print(jinf(text, inf_type, source_inf_form, "未然形"))  # 走ら
 print(jinf(text, inf_type, source_inf_form, "意志形"))  # 走ろう
 print(jinf(text, inf_type, source_inf_form, "命令形"))  # 走れ
 print(jinf(text, inf_type, source_inf_form, "三角形"))  # ValueError: '三角形' is not a valid inflection form
-print(jinf(text, inf_type, source_inf_form, "デアル列命令形"))  # ValueError: 'デアル列命令形' is not a valid inflection form for '走る'
+print(jinf(text, inf_type, source_inf_form, "デアル列命令形"))  # ValueError: 'デアル列命令形' is not a valid inflection form of '子音動詞ラ行'
 ```
 
 ### [pyknp](https://github.com/ku-nlp/pyknp) integration

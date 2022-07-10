@@ -17,7 +17,7 @@ class Jinf:
         self, text: str, inf_type: str, source_inf_form: str, target_inf_form: str
     ):
         if not is_valid_type(inf_type):
-            raise ValueError(f"'{inf_type}' is invariable")
+            raise ValueError(f"'{inf_type}' is a valid inflection type")
 
         if not isinstance(source_inf_form, str) or not is_valid_form(source_inf_form):
             raise ValueError(f"'{source_inf_form}' is not a valid inflection form")
@@ -27,7 +27,7 @@ class Jinf:
 
         if target_inf_form not in self.dict[inf_type]:
             raise ValueError(
-                f"'{target_inf_form} is not a valid inflection form for '{text}'"
+                f"'{target_inf_form}' is not a valid inflection form of '{inf_type}'"
             )
 
         stem = text.strip(self.dict[inf_type][source_inf_form])
