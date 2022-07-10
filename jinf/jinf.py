@@ -40,7 +40,7 @@ class Jinf:
         return self(text, inf_type, source_inf_form, target_inf_form)
 
     def convert_pyknp_morpheme(self, m: "Morpheme", target_inf_form: str) -> str:
-        return self(m.midasi, m.katuyou1, m.katuyou2, target_inf_form)
+        return self(m.genkei, m.katuyou1, "基本形", target_inf_form)
 
     @property
     def dict_path(self) -> str:
