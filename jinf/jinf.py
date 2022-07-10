@@ -31,7 +31,8 @@ class Jinf:
             )
 
         if source_inf_form == "エ基本形":
-            raise NotImplementedError  # TODO: identify the stem
+            # TODO: identify the stem
+            raise NotImplementedError(f"unable to identify the stem of {text}")
         else:
             stem = text.strip(self.dict[inf_type][source_inf_form])
 
