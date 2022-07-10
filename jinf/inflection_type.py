@@ -1,6 +1,6 @@
 from typing import Literal
 
-INFLECTION_TYPES = [
+INFLECTION_TYPES = (
     "母音動詞",
     "子音動詞カ行",
     "子音動詞カ行促音便形",
@@ -33,7 +33,7 @@ INFLECTION_TYPES = [
     "助動詞く型",
     "動詞性接尾辞ます型",
     "動詞性接尾辞うる型",
-]
+)
 
 InflectionType = Literal[
     "母音動詞",

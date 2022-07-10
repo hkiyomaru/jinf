@@ -1,6 +1,6 @@
 from typing import Literal
 
-INFLECTION_FORMS = [
+INFLECTION_FORMS = (
     "語幹",
     "基本形",
     "未然形",
@@ -82,7 +82,7 @@ INFLECTION_FORMS = [
     "ヤ列基本形",
     "ヤ列基本推量形",
     "ヤ列基本省略推量形",
-]
+)
 
 
 InflectionForm = Literal[
