@@ -66,4 +66,4 @@ print(INFLECTION_TYPES)  # ["母音動詞", "子音動詞カ行", "子音動詞�
 print(INFLECTION_FORMS)  # ["語幹", "基本形", "未然形", ...]
 ```
 
-See [JUMAN.katuyou](https://github.com/ku-nlp/JumanDIC/blob/master/grammar/JUMAN.katuyou) in [JumanDic](https://github.com/ku-nlp/JumanDIC).
+See [JUMAN.katuyou](https://github.com/ku-nlp/JumanDIC/blob/master/grammar/JUMAN.katuyou) in [JumanDic](https://github.com/ku-nlp/JumanDIC) for details.
