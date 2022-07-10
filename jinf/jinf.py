@@ -13,23 +13,30 @@ class Jinf:
         self.dict = self._load_dict(dict_path or self.dict_path)
 
     def __call__(self, m: Morpheme, target_inf_form: str) -> str:
-        return self.convert(m.genkei, m.katuyou1, target_inf_form)
+        return self.convert(m.midasi, m.katuyou1, m.katuyou2, target_inf_form)
 
-    def convert(self, lemma: str, inf_type: str, target_inf_form: str):
+    def convert(
+        self, text: str, inf_type: str, source_inf_form: str, target_inf_form: str
+    ):
+        if not is_valid_inflection_type(inf_type):
+            raise ValueError(f"'{inf_type}' is invariable")
+
+        if not isinstance(source_inf_form, str) or not is_valid_inflection_form(
+            source_inf_form
+        ):
+            raise ValueError(f"'{source_inf_form}' is not a valid inflection form")
+
         if not isinstance(target_inf_form, str) or not is_valid_inflection_form(
             target_inf_form
         ):
             raise ValueError(f"'{target_inf_form}' is not a valid inflection form")
 
-        if not is_valid_inflection_type(inf_type):
-            raise ValueError(f"'{lemma}' is invariable")
-
         if target_inf_form not in self.dict[inf_type]:
             raise ValueError(
-                f"'{target_inf_form} is not a valid inflection form for '{lemma}'"
+                f"'{target_inf_form} is not a valid inflection form for '{text}'"
             )
 
-        stem = lemma.strip(self.dict[inf_type]["基本形"])
+        stem = text.strip(self.dict[inf_type][source_inf_form])
         inf = self.dict[inf_type][target_inf_form]
         return stem if inf == "*" else stem + inf
 
