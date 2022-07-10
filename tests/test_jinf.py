@@ -4,7 +4,6 @@ import pytest
 from pyknp import Morpheme
 
 from jinf import Jinf
-from jinf.inflection_form import INFLECTION_FORMS
 
 
 def test_init():
@@ -286,11 +285,10 @@ def test_call_error_1():
 )
 def test_call_error_2(m: Morpheme):
     jinf = Jinf()
-    for inf_form in INFLECTION_FORMS:
-        with pytest.raises(ValueError):
-            _ = jinf.convert(m.midasi, m.katuyou1, m.katuyou2, inf_form)
-        with pytest.raises(ValueError):
-            _ = jinf.convert_pyknp_morpheme(m, inf_form)
+    with pytest.raises(ValueError):
+        _ = jinf.convert(m.midasi, m.katuyou1, m.katuyou2, "基本形")
+    with pytest.raises(ValueError):
+        _ = jinf.convert_pyknp_morpheme(m, "基本形")
 
 
 @pytest.mark.parametrize(
