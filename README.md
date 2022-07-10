@@ -52,7 +52,7 @@ print(jinf.convert_pyknp_morpheme(mrph, "未然形"))  # 走ら
 print(jinf.convert_pyknp_morpheme(mrph, "意志形"))  # 走ろう
 print(jinf.convert_pyknp_morpheme(mrph, "命令形"))  # 走れ
 print(jinf.convert_pyknp_morpheme(mrph, "三角形"))  # ValueError: '三角形' is not a valid inflection form
-print(jinf.convert_pyknp_morpheme(mrph, "デアル列命令形"))  # ValueError: 'デアル列命令形' is not a valid inflection form for '走る'
+print(jinf.convert_pyknp_morpheme(mrph, "デアル列命令形"))  # ValueError: 'デアル列命令形' is not a valid inflection form of '子音動詞ラ行'
 ```
 
 ## List of available inflection types/forms
