@@ -9,6 +9,7 @@ Usage:
 import argparse
 import json
 import os
+from typing import Dict, Optional
 
 parser = argparse.ArgumentParser("Parse JUMAN.katuyou and create jinf.json.")
 parser.add_argument("IN", help="Path to JUMAN.katuyou.")
@@ -28,11 +29,11 @@ with open(args.IN) as f:
 p = 0
 level = 0
 
-inf_form = None
-inf_type = None
-inf = None
+inf_form: Optional[str] = None
+inf_type: Optional[str] = None
+inf: Optional[str] = None
 
-jinf = {}
+jinf: Dict[str, Dict[str, str]] = {}
 
 while True:
     # EOF: break
@@ -78,6 +79,9 @@ while True:
                 inf = dic[p:pp].strip()
             p = pp
 
+            assert isinstance(inf_type, str)
+            assert isinstance(inf_form, str)
+            assert isinstance(inf, str)
             jinf[inf_type][inf_form] = inf
     if c == ")":
         level -= 1

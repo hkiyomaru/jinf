@@ -5,7 +5,7 @@ from typing import Sequence
 import pytest
 from pyknp import Morpheme
 
-from jinf import InflectionForm, Jinf
+from jinf import Jinf
 from jinf.inflection_form import INFLECTION_FORMS
 
 
@@ -221,7 +221,7 @@ def test_init_error_1():
         ),
     ],
 )
-def test_call(m: Morpheme, inf_forms: Sequence[InflectionForm], infs: Sequence[str]):
+def test_call(m: Morpheme, inf_forms: Sequence[str], infs: Sequence[str]):
     jinf = Jinf()
     for inf, inf_form in zip(infs, inf_forms):
         assert inf == jinf(m, inf_form)
@@ -286,7 +286,7 @@ def test_call_error_2(m: Morpheme):
         ),
     ],
 )
-def test_call_error_3(m: Morpheme, inf_forms: Sequence[InflectionForm]):
+def test_call_error_3(m: Morpheme, inf_forms: Sequence[str]):
     jinf = Jinf()
     for inf_form in inf_forms:
         with pytest.raises(ValueError):

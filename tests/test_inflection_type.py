@@ -1,7 +1,6 @@
 import pytest
 
-from jinf import InflectionType
-from jinf.inflection_type import validate_inflection_type
+from jinf.inflection_type import is_valid_inflection_type
 
 
 @pytest.mark.parametrize(
@@ -41,9 +40,9 @@ from jinf.inflection_type import validate_inflection_type
         "動詞性接尾辞うる型",
     ],
 )
-def test_inflection_type(inf_type: InflectionType):
-    assert validate_inflection_type(inf_type) is True
+def test_inflection_type(inf_type: str):
+    assert is_valid_inflection_type(inf_type) is True
 
 
 def test_inflection_type_error():
-    assert validate_inflection_type("foo") is False
+    assert is_valid_inflection_type("foo") is False
