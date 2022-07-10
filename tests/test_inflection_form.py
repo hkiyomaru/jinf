@@ -1,6 +1,6 @@
 import pytest
 
-from jinf.inflection_form import is_valid_inflection_form
+from jinf.inflection_form import is_valid_form
 
 
 @pytest.mark.parametrize(
@@ -90,8 +90,8 @@ from jinf.inflection_form import is_valid_inflection_form
     ],
 )
 def test_inflection_form(inf_form: str):
-    assert is_valid_inflection_form(inf_form) is True
+    assert is_valid_form(inf_form) is True
 
 
 def test_inflection_form_error():
-    assert is_valid_inflection_form("foo") is False
+    assert is_valid_form("foo") is False

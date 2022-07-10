@@ -83,5 +83,5 @@ INFLECTION_FORMS = (
 )
 
 
-def is_valid_inflection_form(inf_form: str) -> bool:
+def is_valid_form(inf_form: str) -> bool:
     return inf_form in INFLECTION_FORMS

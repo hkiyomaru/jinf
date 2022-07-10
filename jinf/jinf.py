@@ -2,8 +2,8 @@ import json
 import os.path
 from typing import TYPE_CHECKING, Dict, Optional
 
-from jinf.inflection_form import is_valid_inflection_form
-from jinf.inflection_type import is_valid_inflection_type
+from jinf.inflection_form import is_valid_form
+from jinf.inflection_type import is_valid_type
 
 if TYPE_CHECKING:
     from pyknp import Morpheme
@@ -16,17 +16,13 @@ class Jinf:
     def __call__(
         self, text: str, inf_type: str, source_inf_form: str, target_inf_form: str
     ):
-        if not is_valid_inflection_type(inf_type):
+        if not is_valid_type(inf_type):
             raise ValueError(f"'{inf_type}' is invariable")
 
-        if not isinstance(source_inf_form, str) or not is_valid_inflection_form(
-            source_inf_form
-        ):
+        if not isinstance(source_inf_form, str) or not is_valid_form(source_inf_form):
             raise ValueError(f"'{source_inf_form}' is not a valid inflection form")
 
-        if not isinstance(target_inf_form, str) or not is_valid_inflection_form(
-            target_inf_form
-        ):
+        if not isinstance(target_inf_form, str) or not is_valid_form(target_inf_form):
             raise ValueError(f"'{target_inf_form}' is not a valid inflection form")
 
         if target_inf_form not in self.dict[inf_type]:

@@ -1,6 +1,6 @@
 import pytest
 
-from jinf.inflection_type import is_valid_inflection_type
+from jinf.inflection_type import is_valid_type
 
 
 @pytest.mark.parametrize(
@@ -41,8 +41,8 @@ from jinf.inflection_type import is_valid_inflection_type
     ],
 )
 def test_inflection_type(inf_type: str):
-    assert is_valid_inflection_type(inf_type) is True
+    assert is_valid_type(inf_type) is True
 
 
 def test_inflection_type_error():
-    assert is_valid_inflection_type("foo") is False
+    assert is_valid_type("foo") is False

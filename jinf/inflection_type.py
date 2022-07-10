@@ -34,5 +34,5 @@ INFLECTION_TYPES = (
 )
 
 
-def is_valid_inflection_type(inf_type: str) -> bool:
+def is_valid_type(inf_type: str) -> bool:
     return inf_type in INFLECTION_TYPES
