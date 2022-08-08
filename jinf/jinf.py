@@ -17,7 +17,7 @@ class Jinf:
 
     def __call__(
         self, text: str, inf_type: str, source_inf_form: str, target_inf_form: str
-    ):
+    ) -> str:
         if not self.is_valid_type(inf_type):
             raise ValueError(f"'{inf_type}' is not a valid inflection type")
 
@@ -35,7 +35,11 @@ class Jinf:
             # TODO: identify the stem
             raise NotImplementedError(f"unable to identify the stem of {text}")
         else:
-            stem = re.sub(rf"{self.dict[inf_type][source_inf_form]}$", "", text)
+            inf = self.dict[inf_type][source_inf_form]
+            if inf == "*":
+                stem = text
+            else:
+                stem = re.sub(rf"{inf}$", "", text)
 
         if target_inf_form == "エ基本形":
             if stem_suffix := self.e_basic_stem_suffix_dict.get(stem[-1], None):
@@ -51,7 +55,7 @@ class Jinf:
 
     def convert(
         self, text: str, inf_type: str, source_inf_form: str, target_inf_form: str
-    ):
+    ) -> str:
         return self(text, inf_type, source_inf_form, target_inf_form)
 
     def convert_pyknp_morpheme(self, m: "Morpheme", target_inf_form: str) -> str:

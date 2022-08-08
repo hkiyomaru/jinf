@@ -209,6 +209,11 @@ def test_init():
             ("語幹", "基本形", "基本連用形"),
             ("い", "いい", "いく"),
         ),
+        (
+            Morpheme("です です です 助動詞 5 * 0 無活用型 26 基本形 2 NIL"),
+            ("語幹", "基本形"),
+            ("です", "です"),
+        ),
     ],
 )
 def test_call(m: Morpheme, inf_forms: Sequence[str], infs: Sequence[str]):
