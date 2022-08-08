@@ -337,3 +337,9 @@ def test_call_error_3(m: Morpheme, inf_forms: Sequence[str]):
             jinf.convert(m.midasi, m.katuyou1, m.katuyou2, inf_form)
         with pytest.raises(ValueError):
             _ = jinf.convert_pyknp_morpheme(m, inf_form)
+
+
+def test_call_error_4():
+    jinf = Jinf()
+    with pytest.raises(ValueError):
+        jinf.convert("高い", "イ形容詞アウオ段", "基本連用形", "基本形")

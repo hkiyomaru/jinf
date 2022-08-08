@@ -33,13 +33,16 @@ class Jinf:
 
         if source_inf_form == "エ基本形":
             # TODO: identify the stem
-            raise NotImplementedError(f"unable to identify the stem of {text}")
+            raise NotImplementedError(f"unable to identify the stem of '{text}'")
         else:
-            inf = self.dict[inf_type][source_inf_form]
-            if inf == "*":
+            if (inf := self.dict[inf_type][source_inf_form]) == "*":
                 stem = text
+            elif match := re.search(rf"{inf}$", text):
+                stem = text[: match.start()]
             else:
-                stem = re.sub(rf"{inf}$", "", text)
+                raise ValueError(
+                    f"'{text}' is not in the '{source_inf_form}' form of '{inf_type}'"
+                )
 
         if target_inf_form == "エ基本形":
             if stem_suffix := self.e_basic_stem_suffix_dict.get(stem[-1], None):
