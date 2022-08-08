@@ -1,5 +1,6 @@
 import json
 import os.path
+import re
 from typing import TYPE_CHECKING, Dict
 
 if TYPE_CHECKING:
@@ -34,7 +35,7 @@ class Jinf:
             # TODO: identify the stem
             raise NotImplementedError(f"unable to identify the stem of {text}")
         else:
-            stem = text.strip(self.dict[inf_type][source_inf_form])
+            stem = re.sub(rf"{self.dict[inf_type][source_inf_form]}$", "", text)
 
         if target_inf_form == "エ基本形":
             if stem_suffix := self.e_basic_stem_suffix_dict.get(stem[-1], None):
