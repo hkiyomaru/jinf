@@ -1,6 +1,6 @@
 # Jinf: Japanese Inflection Converter
 
-[![test](https://img.shields.io/github/workflow/status/hkiyomaru/jinf/test?label=test&logo=Github&style=flat-square)](https://github.com/hkiyomaru/jinf/actions/workflows/test.yml)
+[![test](https://img.shields.io/github/actions/workflow/status/hkiyomaru/jinf/test.yml?branch=main&label=test&logo=Github&style=flat-square)](https://github.com/hkiyomaru/jinf/actions/workflows/test.yml)
 ![PyPI](https://img.shields.io/pypi/v/jinf?style=flat-square)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/jinf?style=flat-square)
 ![License - MIT](https://img.shields.io/github/license/hkiyomaru/jinf?style=flat-square)
