@@ -10,9 +10,9 @@ if TYPE_CHECKING:
 class Jinf:
     def __init__(self):
         dict_dir = os.path.join(os.path.dirname(__file__), "data")
-        with open(os.path.join(dict_dir, "jinf.json"), "rt") as f:
+        with open(os.path.join(dict_dir, "jinf.json"), "rt", encoding="utf-8") as f:
             self.dict: Dict[str, Dict[str, str]] = json.load(f)
-        with open(os.path.join(dict_dir, "e_basic_stem_suffix.json"), "rt") as f:
+        with open(os.path.join(dict_dir, "e_basic_stem_suffix.json"), "rt", encoding="utf-8") as f:
             self.e_basic_stem_suffix_dict: Dict[str, str] = json.load(f)
 
     def __call__(
