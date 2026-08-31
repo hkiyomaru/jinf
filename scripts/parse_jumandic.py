@@ -17,7 +17,7 @@ parser.add_argument("OUT", help="Path to the directory to save jinf.json.")
 args = parser.parse_args()
 
 dic = ""
-with open(args.IN) as f:
+with open(args.IN, encoding="utf-8") as f:
     for line in f:
         if line.strip() == "":
             continue
@@ -86,5 +86,5 @@ while True:
     if c == ")":
         level -= 1
 
-with open(os.path.join(args.OUT, "jinf.json"), "wt") as f:
+with open(os.path.join(args.OUT, "jinf.json"), "wt", encoding="utf-8") as f:
     json.dump(jinf, f, ensure_ascii=False, indent=4)
